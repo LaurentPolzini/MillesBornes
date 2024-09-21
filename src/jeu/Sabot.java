@@ -36,6 +36,10 @@ public class Sabot {
 		return nbCartes == 0;
 	}
 	
+	public Iterateur iterateur() {
+		return new Iterateur();
+	}
+	
 	public void ajouterCarte(Carte carteAAjouter) throws IllegalStateException {
 		if (nbCartes >= 106) {
 			throw new IllegalStateException("Le paquet est plein ! Vous ne pouvez pas ajouter de carte.");
@@ -45,13 +49,13 @@ public class Sabot {
 		++nbOpe;
 	}
 	
-	private class Iterateur implements Iterator<Carte> {
+	public class Iterateur implements Iterator<Carte> {
 		int indiceIT = 0;
 		private int nbOpeRef = nbOpe;
 
 		@Override
 		public boolean hasNext() {
-			return indiceIT < cartesList.length;
+			return indiceIT < nbCartes;
 		}
 
 		@Override

@@ -3,12 +3,13 @@ package testsFonctionnels;
 import cartes.JeuDeCartes;
 
 public class TestJeuDeCartes {
-/*
 	public static void main(String[] args) {
-		JeuDeCartes game = new JeuDeCartes();
+		JeuDeCartes jeu = new JeuDeCartes();
+		System.out.println("JEU:\n" + jeu.affichageJeuDeCartes());
 		
-		System.out.println(game.affichageJeuDeCartes());
-	}
-	*/
+        if (!jeu.checkCount()) {
+            System.out.println("erreur de nombre");
+        }
 
+	}
 }

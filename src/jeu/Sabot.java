@@ -45,13 +45,14 @@ public class Sabot {
 			throw new IllegalStateException("Le paquet est plein ! Vous ne pouvez pas ajouter de carte.");
 		}
 		cartesList[nbCartes - 1] = carteAAjouter;
-		++nbCartes;
-		++nbOpe;
+		nbCartes++;
+		nbOpe++;
 	}
 	
 	public class Iterateur implements Iterator<Carte> {
 		int indiceIT = 0;
 		private int nbOpeRef = nbOpe;
+		boolean nextEffectue = false;
 
 		@Override
 		public boolean hasNext() {
@@ -61,6 +62,7 @@ public class Sabot {
 		@Override
 		public Carte next() throws NoSuchElementException {
 			if (hasNext()) {
+				nextEffectue = true;
 				return cartesList[indiceIT++];
 			}
 			throw new NoSuchElementException("Il n'y a pas de cartes après !");
@@ -71,17 +73,19 @@ public class Sabot {
 		public void remove() throws IllegalStateException, ConcurrentModificationException {
 			verifConcurrence();
 			
-			if ( !(hasNext() || indiceIT > 0) ) {
+			if ( !(hasNext() || indiceIT > 0) && nextEffectue ) {
 				throw new IllegalStateException();
 			}
-			for (int i = indiceIT - 1 ; i < nbCartes - 1 ; ++i) {
+			for (int i = indiceIT - 1 ; i < nbCartes - 1 ; i++) {
 				cartesList[i] = cartesList[i + 1];
 			}
-			--nbCartes;
-			--indiceIT;
+			nbCartes--;
+			indiceIT--;
 			
-			++nbOpe;
-			++nbOpeRef;
+			nbOpe++;
+			nbOpeRef++;
+			
+			nextEffectue = false;
 		}
 		
 		private void verifConcurrence() throws ConcurrentModificationException {

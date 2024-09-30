@@ -1,5 +1,7 @@
 package cartes;
 
+import java.util.Collections;
+
 public class JeuDeCartes {
 	int NB_CONFIG = 19;
 	int NB_CARTES_TOTAL = 106;
@@ -39,12 +41,11 @@ public class JeuDeCartes {
 		return retour.toString();
 	}
 	
-	public Carte[] getListeCarte() {
-		Carte[] cardList = new Carte[NB_CARTES_TOTAL];
-		int indCarte = 0;
+	public Carte[] donnerCartes() {
+		Carte[] cardList = new Carte[this.nbCartesConfig()];
 		
-		for (int i = 0 ; i < NB_CONFIG ; ++i) {
-			for (int j = 0 ; j < typesDeCartes[i].nbExemplaires ; ++j) {
+		for (int i = 0, indCarte = 0 ; i < NB_CONFIG ; i++) {
+			for (int j = 0 ; j < typesDeCartes[i].nbExemplaires ; j++) {
 				cardList[indCarte++] = typesDeCartes[i].getCarte();
 			}
 		}
@@ -52,7 +53,42 @@ public class JeuDeCartes {
 		return cardList;
 	}
 	
-	private class Configuration extends Carte {
+	private int nbCartesConfig() {
+		int nbCards = 0;
+		for (Configuration config : this.typesDeCartes) {
+			nbCards += config.getNbExemplaires();
+		}
+		
+		return nbCards;
+	}
+	
+	public boolean checkCount() {
+		Carte[] cartes = donnerCartes();
+		int cmpt = 0;
+		
+		Carte curCarte = null;
+		int nbExemplaires = 0;
+		
+		for (int i = 0 ; i < NB_CONFIG ; i++ ) {
+			curCarte = typesDeCartes[i].getCarte();
+			nbExemplaires = typesDeCartes[i].getNbExemplaires();
+			
+			for ( int j = 0 ; j < cartes.length ; j++ ) {
+				if (cartes[j] == curCarte) {
+					cmpt++;
+				}
+			}
+			if (cmpt != nbExemplaires) {
+				return false;
+			}
+			
+			cmpt = 0;
+		}
+		
+		return true;
+	}
+	
+	private static class Configuration extends Carte {
 		private int nbExemplaires;
 		private Carte carte;
 		
@@ -69,4 +105,5 @@ public class JeuDeCartes {
 			return carte;	
 		}
 	}
+	
 }

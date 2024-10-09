@@ -11,4 +11,13 @@ public class DebutLimite extends Limite {
 		return "Limite 50";
 	}
 	
+	
+	@Override
+	public boolean equals(Object o) {
+		if (super.equals(o)) {
+			return (o instanceof DebutLimite);
+		}
+		return false;
+	}
+	
 }

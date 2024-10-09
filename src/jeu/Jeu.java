@@ -10,11 +10,11 @@ import utils.GestionCartes;
 public class Jeu {
 	
 	private Sabot sabot;
-	private JeuDeCartes jeu = new JeuDeCartes();
+	private JeuDeCartes jeuDeCartes = new JeuDeCartes();
 	private Carte[] cartes;
 
 	public Jeu() {
-		cartes = jeu.donnerCartes();
+		cartes = jeuDeCartes.donnerCartes();
 		List<Carte> listCards = GestionCartes.melanger(Arrays.asList(cartes));
 		this.sabot = new Sabot((Carte[]) listCards.toArray());
 	}

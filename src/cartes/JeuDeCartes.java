@@ -62,9 +62,19 @@ public class JeuDeCartes {
 		return nbCards;
 	}
 	
+	private int count(Carte carte, Carte[] cartes) {
+		int cmpt = 0;
+		
+		for (int i = 0 ; i < cartes.length ; i++) {
+			if (carte.equals(cartes[i])) {
+				cmpt++;
+			}
+		}
+		return cmpt;
+	}
+	
 	public boolean checkCount() {
 		Carte[] cartes = donnerCartes();
-		int cmpt = 0;
 		
 		Carte curCarte = null;
 		int nbExemplaires = 0;
@@ -73,16 +83,9 @@ public class JeuDeCartes {
 			curCarte = typesDeCartes[i].getCarte();
 			nbExemplaires = typesDeCartes[i].getNbExemplaires();
 			
-			for ( int j = 0 ; j < cartes.length ; j++ ) {
-				if (cartes[j] == curCarte) {
-					cmpt++;
-				}
-			}
-			if (cmpt != nbExemplaires) {
+			if (count(curCarte, cartes) != nbExemplaires) {
 				return false;
 			}
-			
-			cmpt = 0;
 		}
 		
 		return true;

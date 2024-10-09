@@ -16,4 +16,13 @@ public class Borne extends Carte {
 	public String toString() {
 		return Integer.toString(this.km) + "KM";
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Borne borne) {
+			return this.km == borne.getKm();
+		}
+		return false;
+	}
+	
 }

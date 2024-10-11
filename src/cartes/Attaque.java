@@ -13,8 +13,8 @@ public class Attaque extends Bataille {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (super.equals(o)) {
-			return (o instanceof Attaque);
+		if ( (super.equals(o)) && (o instanceof Attaque att) ) {
+			return this.getType().equals(att.getType());
 		}
 		return false;
 	}

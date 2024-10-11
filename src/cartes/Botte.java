@@ -13,8 +13,8 @@ public class Botte extends Probleme {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (super.equals(o)) {
-			return (o instanceof Botte);
+		if ( (super.equals(o)) && (o instanceof Botte botte) ) {
+			return this.getType().equals(botte.getType());
 		}
 		return false;
 	}

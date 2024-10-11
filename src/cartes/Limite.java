@@ -4,6 +4,9 @@ public abstract class Limite extends Carte {
 	
 	@Override
 	public boolean equals(Object o) {
-		return this.getClass().equals(((Limite) o).getClass());
+		if (o != null) {
+			return this.getClass().equals(o.getClass());
+		}
+		return false;
 	}
 }

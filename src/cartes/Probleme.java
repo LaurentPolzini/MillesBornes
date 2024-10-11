@@ -7,14 +7,14 @@ public abstract class Probleme extends Carte {
 		this.type = type;
 	}
 	
-	protected Type getType() {
+	public Type getType() {
 		return type;
 	}
 	
 	@Override
 	public boolean equals(Object o) {
 		if (o != null) {
-			return this.getClass().equals(((Probleme) o).getClass());
+			return this.getClass().equals(o.getClass());
 		}
 		return false;
 	}
